@@ -32,7 +32,7 @@ var logoClass = function(){
     this.theme = function(theme){
       if(theme == 'dark'){
         document.body.classList.add('dark');
-        localStorage.addItem('theme','dark');
+        localStorage.setItem('theme','dark');
       }
       else if(theme == 'light'){
         document.body.classList.remove('dark');
