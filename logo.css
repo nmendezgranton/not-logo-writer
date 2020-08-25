@@ -61,7 +61,6 @@ body{
   text-align: center;
   left: calc(50% - 324px);
   top: calc(50% - 174px);
-  color: white;
   z-index: 100;
   padding: 20px;
   display: none;
