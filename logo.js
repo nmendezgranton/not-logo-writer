@@ -1,8 +1,8 @@
 var logoClass = function(){
 
 
-    this.mostrarMensaje = function(titulo, texto){
-      document.querySelector('.mensajeModal').innerHTML = `<h1>${titulo}</h1><p>${texto}</p><p>Presiona <strong>Escape</strong> para salir</p>`;
+    this.mostrarMensaje = function(titulo, texto, noExit = false){
+      document.querySelector('.mensajeModal').innerHTML = `<h1>${titulo}</h1><p>${texto}</p>${(!noExit) ? '<p>Presiona <strong>Escape</strong> para salir</p>' : ''}`;
       document.querySelector('.mensajeModal').style = 'display:inline';
     }
 
@@ -23,19 +23,19 @@ var logoClass = function(){
             eval(`logo.${ordenes[i]}`);
           }
           catch(e){
-            logo.mostrarMensaje('Ha ocurrido un error', `Un error ocurrió al intentar ejecutar la línea ${i+1}:<br /><pre><code>${ordenes[i]}</code></pre>Los comandos que puedes usar son:<br />adelante(numero)<br />derecha(grados)<br />izquierda(grados).`);
+            logo.mostrarMensaje('Ha ocurrido un error', `Un error ocurrió al intentar ejecutar la línea ${i+1}:<br /><pre><code>${ordenes[i]}</code></pre>Pulsa Reset para ver los comandos disponibles.`);
           }
         }
       }
     }
 
     this.theme = function(theme){
-      if(theme == 'dark'){
-        document.body.classList.add('dark');
-        localStorage.setItem('theme','dark');
+      if(theme == 'light'){
+        document.body.classList.add('light');
+        localStorage.setItem('theme','light');
       }
-      else if(theme == 'light'){
-        document.body.classList.remove('dark');
+      else if(theme == 'dark'){
+        document.body.classList.remove('light');
         localStorage.removeItem('theme');
       }
     }
@@ -235,7 +235,7 @@ document.addEventListener('click', function (event) {
 
 window.onload = function(){
   document.querySelector('#instrucciones').focus();
-  logo.mostrarMensaje('Este <strong>NO</strong> es Logo Writer!', 'Pero puedes usar los mismos comandos básicos. Inténtalo.');
+  logo.mostrarMensaje('Este <strong>NO</strong> es Logo Writer!', 'Pero puedes usar los mismos comandos básicos. Inténtalo:<br /><br />Instrucciones: <br />adelante(x) / derecha(90) / izquierda(45)<br /><br />Formas: <br />cuadrado(largoLado) / triangulo(largoLado)<br />poligono(lados, largoLado) / circulo(diametro)<br />estrella(cantPuntas, largoPunta)<br /><br />Otros: <br />pluma = true|false / theme(\'dark\'|\'light\')', true);
   let theme = localStorage.getItem('theme');
   if(theme){
     logo.theme(theme);
